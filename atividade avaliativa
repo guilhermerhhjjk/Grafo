@@ -1,0 +1,76 @@
+
+class Grafo:
+    def __init__(self, vertices):
+        self.vertices = vertices
+
+    # 1. LISTA DE ADJACÊNCIA
+    def lista_adjacencia(self, arestas):
+        lista = {v: [] for v in self.vertices}
+
+        for origem, destino in arestas:
+            lista[origem].append(destino)
+            lista[destino].append(origem)
+
+        return lista
+
+    # 2. MATRIZ DE ADJACÊNCIA
+    def matriz_adjacencia(self, arestas):
+        tamanho = len(self.vertices)
+
+        matriz = [
+            [0 for _ in range(tamanho)]
+            for _ in range(tamanho)
+        ]
+
+        for origem, destino in arestas:
+            i = self.vertices.index(origem)
+            j = self.vertices.index(destino)
+
+            matriz[i][j] = 1
+            matriz[j][i] = 1
+
+        return matriz
+
+    # 3. LISTA DE ARESTAS
+    def lista_arestas(self, arestas):
+        return arestas
+
+
+# PROGRAMA PRINCIPAL
+vertices = ['A', 'B', 'C', 'D', 'E']
+
+arestas = [
+    ('A', 'B'),
+    ('A', 'C'),
+    ('B', 'D'),
+    ('C', 'D'),
+    ('D', 'E')
+]
+
+grafo = Grafo(vertices)
+
+# Exibindo lista de adjacência
+print("=== LISTA DE ADJACÊNCIA ===")
+lista = grafo.lista_adjacencia(arestas)
+
+for vertice, vizinhos in lista.items():
+    print(f"{vertice}: {vizinhos}")
+
+# Exibindo matriz de adjacência
+print("\n=== MATRIZ DE ADJACÊNCIA ===")
+matriz = grafo.matriz_adjacencia(arestas)
+
+print("  ", vertices)
+
+for i, linha in enumerate(matriz):
+    print(vertices[i], linha)
+
+# Exibindo lista de arestas
+print("\n=== LISTA DE ARESTAS ===")
+lista = grafo.lista_arestas(arestas)
+
+for aresta in lista:
+    print(aresta)
+
+Guilherme Doretto - 2029940
+Giovanni Escórcio - 2061814
